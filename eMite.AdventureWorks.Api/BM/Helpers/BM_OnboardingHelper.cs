@@ -127,17 +127,7 @@ namespace eMite.AdventureWorks.Api.BM.Helpers
                     DataTransferObject = new eob.DTO.DTO_Transfer(TransactionList);
 
                     //Send data for onboarding.
-                    Results = OnboardData(DataTransferObject);
-
-                    //dynamic MsgData = new ExpandoObject();
-                    //MsgData.Id = "11111";
-                    //MsgData.RowsIndexed = TransactionList.Items.Count;
-                    //MsgData.LastChanged = DateTime.UtcNow;
-                    
-                    //bcl.Messaging.DTO.DTO_DashboardMessageDynamic Msg = new Framework.Bcl.Messaging.DTO.DTO_DashboardMessageDynamic("IndexChanged", Config.IndexGroup, "SalesOrder", "Id","Id", "RowsIndexed",new string[] { "LastChanged" }, MsgData);
-
-                    //SendMessage(Msg);
-                    
+                    Results = OnboardData(DataTransferObject);                 
                     
                 }
             }
