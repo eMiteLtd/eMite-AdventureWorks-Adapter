@@ -10,4 +10,4 @@ eMite adapters can be ran through the eMite Adapter Framework without requiring 
 
 Below is a general overview of of where the adpaters fall in the overall eMite architecture.
 
-
+![eMiteArchitectureOverview](Images/eMiteArchitectureOverview.png?raw=true "eMiteArchitectureOverview")
