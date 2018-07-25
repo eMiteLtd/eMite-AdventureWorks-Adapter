@@ -1,0 +1,90 @@
+﻿{
+    "version": "7.0.0.0",
+    "config": {
+        "setup": {
+            "instanceName": "700T6",
+            "installPath": "D:\\Program Files (x86)\\eMiteInstallerTests\\eMite\\700T6",
+            "logPath": "D:\\Program Files (x86)\\eMiteInstallerTests\\eMite\\700T6\\logs",
+            "tempPath": "D:\\Program Files (x86)\\eMiteInstallerTests\\eMite\\700T6\\temp",
+            "appServerUrl": "https://msawin10/emite/700t6/",
+            "webServerUrl": "https://msawin10/emite/700t6/",
+            "serverPort1": 9050,
+            "serverPort2": 9051,
+            "productId": "eMite"
+        },
+        "database": {
+            "provider": "System.Data.SqlClient",
+            "connectionString": "Server=.;Database=EmiteTest01;Trusted_Connection=True"
+        },
+        "logging": {
+            "enabled": true,
+            "level": "Info",
+            "sources": []
+        },
+        "indexStore": {
+            "currentSearchEngine": "Es",
+            "elasticsearch": {
+                "url": "http://MSAWIN10:9500/",
+                "timeout": "00:00:30.000",
+                "retryCount": 3,
+                "numberOfShards": 3,
+                "numberOfReplicas": 0,
+                "bulkSize": 5000
+            },
+            "maxMemoryAllocation": 7000
+        },
+        "FrameworkBcl": {
+            "ConnectionString": "Server=.;Database=EmiteTest01;Trusted_Connection=True"
+        },
+        "Adapter": {
+            "OnboardingUrl": "https://msawin10/emite/700t6/dataonboardingapi",
+            "ConfigurationsUrl": "https://msawin10/emite/700t6/dataconfigurationsapi",
+            "MessagingUrl": "https://msawin10/emite/700t6/messagingapi",
+            "DefaultBatchSize": "10000",
+            "DefaultOnboardingStorageType": "SqlServer",
+            "Dal": "SqlServer",
+            "LocalConfigurationsUrl": "https://msawin10/emite/700t6/dataconfigurationsapi"
+        },
+        "MessagingFramework": {
+            "EnableMultiTenancy": false,
+            "Version": "v2"
+        },
+        "Proxy": {
+            "Address": "",
+            "Port": 0,
+            "Username": "",
+            "Password": "",
+            "Domain": "",
+            "ByPassForLocal": true,
+            "Enabled": false
+        },
+      "Cache": {
+        "useResponseCache": false,
+        "CacheItemExpiryInSeconds": 6000
+      },
+        "indexWriter": {
+            "parallelThreads": 4,
+            "refreshindex": false,
+            "waitInterval": 1,
+            "alwaysOverrideSnapshot": true
+        },
+        "indexServer": {
+            "appendRemoveIndexGroupName": false,
+            "firstDayOfWeek": "Monday"
+        },
+        "DashboardService": {
+            "MetricIdUniqueName": "[MetricId].[MetricId].&amp;[",
+            "EnableSSOFilter": false,
+            "SSOUserFilterFactQueries": "agenthistory,agentobservation,agentpresencehistory,agentstatehistory,agentstateaggregation",
+            "SSOUserFilterUniqueName": "[userId].[userId].&[",
+            "SSOQueueFilterFactQueries": "queuehistory",
+            "SSOQueueFilterUniqueName": "[queueId].[queueId].&["
+        },
+        "RTBI": {
+            "DimensionMaxTerms": 10000
+        },
+        "Admin": {
+            "ShowOrganizations": false
+        }
+    }
+}
