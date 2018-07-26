@@ -74,7 +74,7 @@ namespace eMite.AdventureWorks.Api.DAL.SalesOrder
                                       ,h.[Freight]
                                       ,h.[TotalDue]
                                       ,h.[Comment]
-                                      ,h.[rowguid] HeaderRowGuid
+                                      ,CONVERT(varchar(50), h.[rowguid],120) HeaderRowGuid
                                       ,h.[ModifiedDate]
 
 									  ,ISNULL(e.FirstName,'') + ' ' + ISNULL(e.MiddleName,'') + ' ' + ISNULL(e.LastName,'') SalesPerson

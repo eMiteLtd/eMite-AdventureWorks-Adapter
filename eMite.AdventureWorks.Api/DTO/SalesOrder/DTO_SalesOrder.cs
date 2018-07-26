@@ -7,6 +7,7 @@ using bcl = eMite.Framework.Bcl;
 
 namespace eMite.AdventureWorks.Api.DTO.SalesOrder
 {
+    
     public class DTO_SalesOrder: bcl.Base.DTO.DTO_Base
     {
         #region "Properties"
@@ -34,7 +35,7 @@ namespace eMite.AdventureWorks.Api.DTO.SalesOrder
         public decimal Freight { get; set; }
         public decimal TotalDue { get; set; }
         public string Comment { get; set; }
-        public Guid HeaderRowGuid { get; set; }
+        public string HeaderRowGuid { get; set; }
         public DateTime ModifiedDate { get; set; }
         public string SalesPerson { get; set; }
         public string CustomerName { get; set; }
