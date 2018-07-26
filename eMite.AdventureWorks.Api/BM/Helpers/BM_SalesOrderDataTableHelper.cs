@@ -68,7 +68,7 @@ namespace eMite.AdventureWorks.Api.BM.Helpers
             {
                 //Generate table if it does not exist.
                 if (SalesOrderTable == null)
-                    GenerateSalesOrderDatatable("SalesOrder");
+                    GenerateSalesOrderDatatable(SalesOrderIndexerConfig.IndexName);
 
                 //check and add all sales orders to the datatable.
                 if (salesOrders != null)
@@ -92,7 +92,7 @@ namespace eMite.AdventureWorks.Api.BM.Helpers
             {
                 //Generate datatable if it does not exists
                 if (SalesOrderTable == null)
-                    GenerateSalesOrderDatatable("SalesOrder");
+                    GenerateSalesOrderDatatable(SalesOrderIndexerConfig.IndexName);
 
                 DataRow NewRow = SalesOrderTable.NewRow();
 
