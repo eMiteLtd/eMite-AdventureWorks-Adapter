@@ -19,7 +19,7 @@ namespace eMite.AdventureWorks.UnitTest
             addinview.DTO.DTO_HostToAddIn HostToAddInData = bmPlugin.GetSampleConfig();
 
             //set instance name. Can be any text for testing
-            HostToAddInData.Config.CFGInstances[0].UniqueName = "Sample Transactions Instance";
+            HostToAddInData.Config.CFGInstances[0].UniqueName = "SampleAdventureWorks";
 
             //set the storage type to text file for testing purposes
             HostToAddInData.Config.SetConfig("StorageType","ElasticSearch");

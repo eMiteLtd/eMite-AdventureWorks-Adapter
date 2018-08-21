@@ -24,6 +24,9 @@ namespace eMite.AdventureWorks.Api.BM
         public BM_AdapterController(DTO.DTO_Config config)
         {
             Config = config;
+
+            Misc.Utilities.Initialize(Config);
+
             BmSalesOrder = new BM.SalesOrder.BM_SalesOrder(config);
         }
 
@@ -37,6 +40,10 @@ namespace eMite.AdventureWorks.Api.BM
         public void Start()
         {
             bool ExitLoop = true;
+
+            //authenticated token is globaly available via the BM_Authentication business module
+            Log.Info("Authenticated Token: " + BM.Helpers.BM_Authentication.AuthenticatedToken);
+
             //get sales order filter criteria
             var SalesOrderFilter = GetQueryRange();
 
@@ -122,7 +129,7 @@ namespace eMite.AdventureWorks.Api.BM
             //return the sales order filter object.
             return SalesOrderFilter;
         }
-
+        
         #endregion
 
 
