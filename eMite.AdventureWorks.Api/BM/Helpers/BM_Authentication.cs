@@ -11,6 +11,7 @@ namespace eMite.AdventureWorks.Api.BM.Helpers
     {
         #region "Properties"
         public static string AuthenticatedToken { get; set; }
+        public static bool IsAuthenticated { get; set; }
 
         private string AuthenticatedTokenKey = "AuthenticatedToken";
         #endregion
@@ -32,8 +33,6 @@ namespace eMite.AdventureWorks.Api.BM.Helpers
         /// <returns></returns>
         public bool Authenticate()
         {
-            bool IsAuthenticated = false;
-
             IsAuthenticated = GetToken();
 
             return IsAuthenticated;
@@ -95,6 +94,11 @@ namespace eMite.AdventureWorks.Api.BM.Helpers
             {
                 //Write you code to validate token here.
                 IsTokenValid = true;
+                IsAuthenticated = true;
+            }
+            else
+            {
+                IsAuthenticated = false;
             }
 
             return IsTokenValid;
@@ -122,11 +126,14 @@ namespace eMite.AdventureWorks.Api.BM.Helpers
                 //save to database.
                 Misc.Utilities.BmAdapterData.Save();
 
+                IsAuthenticated = true;
+
             }
             else
             {
                 //if login was not successful then we set the authenticated token to empty.
                 AuthenticatedToken = "";
+                IsAuthenticated = false;
             }
 
             return IsLoginSuccessful;

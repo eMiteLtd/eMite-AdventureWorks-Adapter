@@ -44,59 +44,66 @@ namespace eMite.AdventureWorks.Api.BM
             //authenticated token is globaly available via the BM_Authentication business module
             Log.Info("Authenticated Token: " + BM.Helpers.BM_Authentication.AuthenticatedToken);
 
-            //get sales order filter criteria
-            var SalesOrderFilter = GetQueryRange();
 
-            //loop until EndDate < DateTime.UTCNow
-            do
+            //only proceed if the authentication token is valid i.e. the code successfully authenticated with the source api. In this sample this will always be true. 
+            if (BM.Helpers.BM_Authentication.IsAuthenticated)
             {
-                bcl.DTO.DTO_Result OnboardResults = null;
 
-                Log.Info("StartDate: " + SalesOrderFilter.StartDate.ToString("yyyy-MM-ddHH:mm:ss") + " | EndDate: " + SalesOrderFilter.EndDate.ToString("yyyy-MM-ddHH:mm:ss"));
+                //get sales order filter criteria
+                var SalesOrderFilter = GetQueryRange();
 
-
-                //load sales orders using the sale order filter
-                var Data = BmSalesOrder.Get(SalesOrderFilter);
-
-                //check if call was successful
-                if (Data.Successful)
+                //loop until EndDate < DateTime.UTCNow
+                do
                 {
-                    //check if there were results returned for the poll.
-                    if (Data.Results != null)
+                    bcl.DTO.DTO_Result OnboardResults = null;
+
+                    Log.Info("StartDate: " + SalesOrderFilter.StartDate.ToString("yyyy-MM-ddHH:mm:ss") + " | EndDate: " + SalesOrderFilter.EndDate.ToString("yyyy-MM-ddHH:mm:ss"));
+
+
+                    //load sales orders using the sale order filter
+                    var Data = BmSalesOrder.Get(SalesOrderFilter);
+
+                    //check if call was successful
+                    if (Data.Successful)
                     {
-                        //cast the data into the SalesOrderList Object
-                        DTO.SalesOrder.DTO_SalesOrderList SalesOrders = (DTO.SalesOrder.DTO_SalesOrderList)Data.Results;
-
-                        //Send data for onboarding.
-                        OnboardResults = BmSalesOrder.Onboard(SalesOrders);
-
-                        //check if data onboarding was successful.
-                        if (OnboardResults.Errors != null)
+                        //check if there were results returned for the poll.
+                        if (Data.Results != null)
                         {
-                            //output error logs if any.
-                            if (OnboardResults.Errors.Count > 0)
+                            //cast the data into the SalesOrderList Object
+                            DTO.SalesOrder.DTO_SalesOrderList SalesOrders = (DTO.SalesOrder.DTO_SalesOrderList)Data.Results;
+
+                            //Send data for onboarding.
+                            OnboardResults = BmSalesOrder.Onboard(SalesOrders);
+
+                            //check if data onboarding was successful.
+                            if (OnboardResults.Errors != null)
                             {
-                                Log.Warn(OnboardResults.Errors[0]);
+                                //output error logs if any.
+                                if (OnboardResults.Errors.Count > 0)
+                                {
+                                    Log.Warn(OnboardResults.Errors[0]);
+                                }
                             }
                         }
                     }
-                }
 
-                //check if the current poll EndDate is less than UtcNow. So that we can prepare a new filter criteria for the next data poll
-                if (SalesOrderFilter.EndDate < DateTime.UtcNow)
-                {
-                    //set filter criteia for next poll. 
-                    SalesOrderFilter.StartDate = SalesOrderFilter.EndDate;
-                    //add the configured QueryInterval set by the user for each poll.
-                    SalesOrderFilter.EndDate = SalesOrderFilter.StartDate.AddMinutes(Config.QueryInterval);
+                    //check if the current poll EndDate is less than UtcNow. So that we can prepare a new filter criteria for the next data poll
+                    if (SalesOrderFilter.EndDate < DateTime.UtcNow)
+                    {
+                        //set filter criteia for next poll. 
+                        SalesOrderFilter.StartDate = SalesOrderFilter.EndDate;
+                        //add the configured QueryInterval set by the user for each poll.
+                        SalesOrderFilter.EndDate = SalesOrderFilter.StartDate.AddMinutes(Config.QueryInterval);
 
-                    ExitLoop = false;
-                }
-                else
-                    ExitLoop = true;
+                        ExitLoop = false;
+                    }
+                    else
+                        ExitLoop = true;
 
 
-            } while (ExitLoop == false);
+                } while (ExitLoop == false);
+
+            }
 
         }
 
