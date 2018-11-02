@@ -28,7 +28,7 @@ namespace eMite.AdventureWorks.Api.BM.Helpers
 
             UniqueName = Config.ClassDefinition.CFGInstances[0].UniqueName + " - AdapterData";
 
-            BmConfig = new bcl.Configurations.BM.BM_Configurations("AdapterData", UniqueName,true);
+            BmConfig = new bcl.Configurations.BM.BM_Configurations("AdapterData", UniqueName);
 
         }
         #endregion
@@ -65,7 +65,7 @@ namespace eMite.AdventureWorks.Api.BM.Helpers
         /// </summary>
         public void Save()
         {
-            BmConfig.Save(true);
+            BmConfig.Save();
         }
         #endregion
 
